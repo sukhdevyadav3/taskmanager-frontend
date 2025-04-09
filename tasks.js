@@ -1,4 +1,8 @@
-const apiUrl = 'https://localhost:7246/api/Tasks'; // changed to local
+const API_BASE_URL = window.location.hostname === 'localhost'
+  ? 'https://localhost:7246'
+  : 'https://task-manager-fullstack-production.up.railway.app';
+
+const apiUrl = `${API_BASE_URL}/api/Tasks`;
 const token = localStorage.getItem('token');
 let editingTaskId = null;
 
@@ -21,6 +25,11 @@ async function fetchTasks() {
   const response = await fetch(`${apiUrl}${queryString}`, {
     headers: { Authorization: `Bearer ${token}` }
   });
+
+  if (!response.ok) {
+    alert('Failed to load tasks');
+    return;
+  }
 
   const tasks = await response.json();
   const list = document.getElementById('taskList');

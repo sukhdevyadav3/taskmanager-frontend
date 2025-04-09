@@ -1,3 +1,7 @@
+const API_BASE_URL = window.location.hostname === 'localhost'
+  ? 'https://localhost:7246'
+  : 'https://task-manager-fullstack-production.up.railway.app';
+
 async function register(event) {
   event.preventDefault(); // prevent form reload
 
@@ -6,7 +10,7 @@ async function register(event) {
   const password = document.getElementById('password').value;
 
   try {
-    const response = await fetch('https://localhost:7246/api/Users/register', {
+    const response = await fetch(`${API_BASE_URL}/api/Users/register`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ fullName, username, password })
