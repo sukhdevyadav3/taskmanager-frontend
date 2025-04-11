@@ -1,6 +1,4 @@
-const API_BASE_URL = window.location.hostname === 'localhost'
-  ? 'https://localhost:7246'
-  : 'https://task-manager-fullstack-production.up.railway.app';
+const API_BASE_URL = 'https://localhost:7246'; // Local backend UR
 
 async function register(event) {
   event.preventDefault(); // prevent form reload
